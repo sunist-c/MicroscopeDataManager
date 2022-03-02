@@ -8,10 +8,34 @@
         mc:Ignorable="d"
         Title="显微镜切片管理工具" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        <hc:Card/>
+
+        <!--menu-->
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            
+        </Menu>
+        
+        <!--status bar-->
+        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            
+        </StatusBar>
+
+        <!--left panel-->
+        <Grid Grid.Column="0" Grid.Row="1">
+            
+        </Grid>
+
+        <!--right panel-->
+        <Grid Grid.Column="1" Grid.Row="1">
+            
+        </Grid>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MicroscopeDataManager.Libs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,6 @@ namespace MicroscopeDataManager
         {
             InitializeComponent();
         }
+
     }
 }
