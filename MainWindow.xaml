@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MicroscopeDataManager"
         mc:Ignorable="d"
-        Title="显微镜切片管理工具" Height="450" Width="800">
+        Title="SliceDataManager - 切片数据管理工具" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -20,22 +20,107 @@
 
         <!--menu-->
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            
+            <MenuItem Header="File" Name="Menu_File">
+                <MenuItem Header="Open" Name="Menu_File_Open" Click="Menu_File_Open_Click"/>
+                <MenuItem Header="New" Name="Menu_File_New" Click="Menu_File_New_Click"/>
+                <Separator/>
+                <MenuItem Header="Export" Name="Menu_File_Export">
+                    <MenuItem Header="Full Package" Name="Menu_File_Export_Package" Click="Menu_File_Export_Package_Click"/>
+                    <MenuItem Header="XML Only" Name="Menu_File_Export_Xml" Click="Menu_File_Export_Xml_Click"/>
+                    <MenuItem Header="Slice Only" Name="Menu_File_Export_Slice" Click="Menu_File_Export_Slice_Click"/>
+                </MenuItem>
+                <MenuItem Header="Import" Name="Menu_File_Import">
+                    <MenuItem Header="Replace XML" Name="Menu_File_Import_Xml" Click="Menu_File_Import_Xml_Click"/>
+                    <MenuItem Header="Replace Slice" Name="Menu_File_Import_Slice" Click="Menu_File_Import_Slice_Click"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit" Name="Menu_Edit">
+                <MenuItem Header="Undo" Name="Menu_Edit_Undo" Click="Menu_Edit_Undo_Click"/>
+                <MenuItem Header="Reset" Name="Menu_Edit_Reset" Click="Menu_Edit_Reset_Click"/>
+                <MenuItem Header="Copy" Name="Menu_Edit_Copy" Click="Menu_Edit_Copy_Click"/>
+                <MenuItem Header="Paste" Name="Menu_Edit_Paste" Click="Menu_Edit_Paste_Click"/>
+            </MenuItem>
+            <MenuItem Header="Setting" Name="Menu_Setting">
+                <MenuItem Header="About" Name="Menu_Setting_About" Click="Menu_Setting_About_Click"/>
+                <MenuItem Header="Update" Name="Menu_Setting_Update" Click="Menu_Setting_Update_Click"/>
+                <MenuItem Header="License" Name="Menu_Setting_License" Click="Menu_Setting_License_Click"/>
+                <Separator/>
+                <MenuItem Header="Prefrence" Name="Menu_Setting_Prefrence" Click="Menu_Setting_Prefrence_Click"/>
+                <MenuItem Header="Register" Name="Menu_Setting_Register" Click="Menu_Setting_Register_Click"/>
+                <MenuItem Header="Exit" Name="Menu_Setting_Exit" Click="Menu_Setting_Exit_Click"/>
+            </MenuItem>
         </Menu>
-        
+
         <!--status bar-->
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock Text="Registed" Name="StatusBar_RegisterStatus"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Center">
+                <TextBlock Text="Ready" Name="StatusBar_Status"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Text="Power by Swu-Acm-Lab, 2019-2022" HorizontalAlignment="Left"/>
+            </StatusBarItem>
         </StatusBar>
 
         <!--left panel-->
         <Grid Grid.Column="0" Grid.Row="1">
-            
+
         </Grid>
 
         <!--right panel-->
         <Grid Grid.Column="1" Grid.Row="1">
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ToolBar Grid.Row="0" Header="Toolbox: ">
+                <Button Height="30" Name="Toolbox_Light" Click="Toolbox_Light_Click">
+                    <Image Source="/Assets/light.png"/>
+                </Button>
+                <Button Height="30" Name="Toolbox_HalfDown" Click="Toolbox_HalfDown_Click">
+                    <Image Source="/Assets/half_down.png"/>
+                </Button>
+                <Button Height="30" Name="Toolbox_HalfUp" Click="Toolbox_HalfUp_Click">
+                    <Image Source="/Assets/half_up.png"/>
+                </Button>
+                <Separator/>
+                <Button Height="30" Name="Toolbox_PreviewOn" Click="Toolbox_PreviewOn_Click">
+                    <Image Source="/Assets/preview_on.png"/>
+                </Button>
+                <Button Height="30" Name="Toolbox_PreviewOff" Click="Toolbox_PreviewOff_Click">
+                    <Image Source="/Assets/preview_off.png"/>
+                </Button>
+                <Separator/>
+                <Button Height="30" Name="Toolbox_ZoomIn" Click="Toolbox_ZoomIn_Click">
+                    <Image Source="/Assets/zoom_in.png"/>
+                </Button>
+                <Button Height="30" Name="Toolbox_ZoomOut" Click="Toolbox_ZoomOut_Click">
+                    <Image Source="/Assets/zoom_out.png"/>
+                </Button>
+                <Separator/>
+                <Button Height="30" Name="Toolbox_SmallDown" Click="Toolbox_SmallDown_Click">
+                    <Image Source="/Assets/small_down.png"/>
+                </Button>
+                <Button Height="30" Name="Toolbox_LargeDown" Click="Toolbox_LargeDown_Click">
+                    <Image Source="/Assets/large_down.png"/>
+                </Button>
+                <Button Height="30" Name="Toolbox_LargeUp" Click="Toolbox_LargeUp_Click">
+                    <Image Source="/Assets/large_up.png"/>
+                </Button>
+                <Button Height="30" Name="Toolbox_SmallUp" Click="Toolbox_SmallUp_Click">
+                    <Image Source="/Assets/small_down.png"/>
+                </Button>
+            </ToolBar>
+
+            <Image Grid.Row="1" Stretch="UniformToFill" Name="Slice">
+                
+                <hc:Magnifier.Instance>
+                    <hc:Magnifier Scale="4" HorizontalOffset="0" VerticalOffset="0" Name="Slice_Magnifier"/>
+                </hc:Magnifier.Instance>
+            </Image>
         </Grid>
     </Grid>
 </Window>
