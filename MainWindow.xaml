@@ -14,8 +14,8 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
 
         <!--menu-->
@@ -39,6 +39,8 @@
                 <MenuItem Header="Reset" Name="Menu_Edit_Reset" Click="Menu_Edit_Reset_Click"/>
                 <MenuItem Header="Copy" Name="Menu_Edit_Copy" Click="Menu_Edit_Copy_Click"/>
                 <MenuItem Header="Paste" Name="Menu_Edit_Paste" Click="Menu_Edit_Paste_Click"/>
+                <Separator/>
+                <MenuItem Header="Modify" Name="Menu_Edit_Modify" Click="Menu_Edit_Modify_Click"/>
             </MenuItem>
             <MenuItem Header="Setting" Name="Menu_Setting">
                 <MenuItem Header="About" Name="Menu_Setting_About" Click="Menu_Setting_About_Click"/>
@@ -56,6 +58,9 @@
             <StatusBarItem HorizontalAlignment="Left">
                 <TextBlock Text="Registed" Name="StatusBar_RegisterStatus"/>
             </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock Text="Author" Name="StatusBar_Author"/>
+            </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Center">
                 <TextBlock Text="Ready" Name="StatusBar_Status"/>
             </StatusBarItem>
@@ -66,7 +71,7 @@
 
         <!--left panel-->
         <Grid Grid.Column="0" Grid.Row="1">
-
+            <hc:PropertyGrid Name="Editor" SourceUpdated="Editor_SourceUpdated"/>
         </Grid>
 
         <!--right panel-->
@@ -115,8 +120,8 @@
                 </Button>
             </ToolBar>
 
-            <Image Grid.Row="1" Stretch="UniformToFill" Name="Slice">
-                
+            <Image Grid.Row="1" Stretch="UniformToFill" Name="Slice" HorizontalAlignment="Center" VerticalAlignment="Center">
+
                 <hc:Magnifier.Instance>
                     <hc:Magnifier Scale="4" HorizontalOffset="0" VerticalOffset="0" Name="Slice_Magnifier"/>
                 </hc:Magnifier.Instance>

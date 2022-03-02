@@ -1,41 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace MicroscopeDataManager.Libs
 {
     public class SliceProperty
     {
-        public string Name { get; set; } = "name";
-        public string Author { get; set; } = "author";
-        public string Description { get; set; } = "description";
-        public string Version { get; set; } = "version";
-        public string FilePath { get; set; } = "filepath";
-        public string Thumbnail { get; set; } = "thumbnail";
+        internal Slice slice = new Slice();
 
-        public bool Pack(string outputPath)
+        [Category("BasicAtribute")]
+        public string SliceName { get => slice.Name; set => slice.Name = value; }
+
+        [Category("BasicAtribute")]
+        public string SliceDescription { get => slice.Description; set => slice.Description = value; }
+
+        [Category("BasicAtribute")]
+        public string Author { get => slice.Author; }
+
+        [Category("BasicAtribute")]
+        public string Version { get => slice.Version; }
+
+        [Category("MediaAtribute")]
+        public int SliceHeight { get; internal set; }
+
+        [Category("MediaAtribute")]
+        public int SliceWidth { get; internal set; }
+
+        [Category("MediaAtribute")]
+        public string FilePath { get; internal set; } = "";
+
+        [Category("MediaAtribute")]
+        public string FileSize { get; internal set; } = "0 KB";
+
+        [Category("MediaAtribute")]
+        public bool Avalid { get; internal set; }
+
+        internal void LoadFile(BitmapImage image, int size)
         {
-            try
-            {
-                // pack xml file
-                using (StreamWriter writer = new StreamWriter(outputPath))
-                {
-                    System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(SliceProperty));
-                    xmlSerializer.Serialize(writer, this);
-                }
+            FilePath = slice.FilePath;
+            SliceWidth = image.PixelWidth;
+            SliceHeight = image.PixelHeight;
+            FileSize = String.Format($"{size} KB");
+            Avalid = SliceWidth > 500 && SliceHeight > 500;
+        }
 
-                // pack image
-                
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.Message);
-            }
-            return true;
+        public SliceProperty()
+        {
+            slice.GenerateVersion();
         }
     }
 }

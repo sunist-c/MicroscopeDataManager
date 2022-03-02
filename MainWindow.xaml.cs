@@ -1,18 +1,9 @@
 ﻿using MicroscopeDataManager.Libs;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MicroscopeDataManager
 {
@@ -21,9 +12,12 @@ namespace MicroscopeDataManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal SliceProperty property = new SliceProperty();
+
         public MainWindow()
         {
             InitializeComponent();
+            Editor.SelectedObject = property;
         }
 
         private void Menu_File_Open_Click(object sender, RoutedEventArgs e)
@@ -38,7 +32,12 @@ namespace MicroscopeDataManager
 
         private void Menu_File_Export_Package_Click(object sender, RoutedEventArgs e)
         {
-
+            var x = new SaveFileDialog();
+            if (x.ShowDialog() != false)
+            {
+                FileInfo info = new FileInfo(x.FileName);
+                property.slice.Pack(info.DirectoryName);
+            }
         }
 
         private void Menu_File_Export_Xml_Click(object sender, RoutedEventArgs e)
@@ -176,6 +175,32 @@ namespace MicroscopeDataManager
         private void Toolbox_SmallUp_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Menu_Edit_Modify_Click(object sender, RoutedEventArgs e)
+        {
+            var x = new OpenFileDialog();
+            x.Filter = "切片|*.png;*.jpg";
+            if (x.ShowDialog() == true)
+            {
+                FileInfo info = new FileInfo(x.FileName);
+                property.slice.FilePath = info.FullName;
+                Uri uri = new Uri(info.FullName);
+                BitmapImage bitmap = new BitmapImage(uri);
+                Slice.Source = bitmap;
+                property.LoadFile(bitmap, (int)System.Math.Ceiling(info.Length / 1024.0));
+
+                Editor.SelectedObject = null;
+                Editor.SelectedObject = property;
+            } else
+            {
+                
+            }
+        }
+
+        private void Editor_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+            MessageBox.Show("Changed");
         }
     }
 }
