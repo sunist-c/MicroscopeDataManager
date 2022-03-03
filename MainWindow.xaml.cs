@@ -5,8 +5,6 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using ICSharpCode.SharpZipLib.Checksums;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace MicroscopeDataManager
 {
@@ -63,6 +61,8 @@ namespace MicroscopeDataManager
                     return;
                 }
             }
+
+            MessageBox.Show("导出即将开始，程序会执行耗时任务，卡死是正常现象\n点击确认键后将开始导出步骤", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
 
             var x = new SaveFileDialog();
             x.Filter = "数字切片|*.*";

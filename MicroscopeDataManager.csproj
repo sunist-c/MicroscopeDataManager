@@ -6,13 +6,26 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <DebugType>embedded</DebugType>
+    <SignAssembly>False</SignAssembly>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageIcon>icon.png</PackageIcon>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>2</WarningLevel>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>2</WarningLevel>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\half_down.png" />
     <None Remove="Assets\half_up.png" />
-    <None Remove="Assets\icon.png" />
     <None Remove="Assets\large_down.png" />
     <None Remove="Assets\large_up.png" />
     <None Remove="Assets\light.png" />
@@ -22,6 +35,7 @@
     <None Remove="Assets\small_up.png" />
     <None Remove="Assets\zoom_in.png" />
     <None Remove="Assets\zoom_out.png" />
+    <None Remove="Utils\7z.exe" />
     <None Remove="Utils\compress.exe" />
   </ItemGroup>
 
@@ -40,7 +54,6 @@
 
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.3.0" />
-    <PackageReference Include="ICSharpCode.SharpZipLib.dll" Version="0.85.4.369" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="10.0.0" />
   </ItemGroup>
 
@@ -81,9 +94,29 @@
     <Resource Include="Assets\zoom_out.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Utils\7z.exe" />
     <Resource Include="Utils\compress.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
