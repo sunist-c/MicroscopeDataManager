@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ICSharpCode.SharpZipLib.Checksums;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace MicroscopeDataManager.Libs
 {
@@ -28,6 +30,17 @@ namespace MicroscopeDataManager.Libs
         {
             PackXml(outputPath);
             PackImage(outputPath);
+
+            DirectoryInfo info = new DirectoryInfo(outputPath);
+            // pack zip
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "7z.exe";
+            process.StartInfo.Arguments = String.Format($"a -tzip {info.Parent.FullName}/{info.Name} {info.FullName}/info.xml {info.FullName}/slice.png {info.FullName}/thumbnail.png");
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            process.WaitForExit();
+            MessageBox.Show("Exported!");
         }
 
         public void PackXml(string outputPath)
@@ -48,7 +61,6 @@ namespace MicroscopeDataManager.Libs
             process.StartInfo.CreateNoWindow = true;
             process.Start();
             process.WaitForExit();
-            MessageBox.Show("Exported!");
         }
     }
 }

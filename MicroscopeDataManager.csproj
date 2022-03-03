@@ -6,11 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\half_down.png" />
     <None Remove="Assets\half_up.png" />
+    <None Remove="Assets\icon.png" />
     <None Remove="Assets\large_down.png" />
     <None Remove="Assets\large_up.png" />
     <None Remove="Assets\light.png" />
@@ -33,7 +35,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.3.0" />
+    <PackageReference Include="ICSharpCode.SharpZipLib.dll" Version="0.85.4.369" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +49,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\half_up.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\large_down.png">

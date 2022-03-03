@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MicroscopeDataManager"
         mc:Ignorable="d"
-        Title="SliceDataManager - 切片数据管理工具" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
+        Title="SliceDataManager - 切片数据管理工具" Height="800" Width="1200" WindowStartupLocation="CenterScreen" Icon="/Assets/icon.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -20,36 +20,35 @@
 
         <!--menu-->
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <MenuItem Header="File" Name="Menu_File">
-                <MenuItem Header="Open" Name="Menu_File_Open" Click="Menu_File_Open_Click"/>
-                <MenuItem Header="New" Name="Menu_File_New" Click="Menu_File_New_Click"/>
+            <MenuItem Header="文件" Name="Menu_File">
+                <MenuItem Header="打开" Name="Menu_File_Open" Click="Menu_File_Open_Click"/>
+                <MenuItem Header="新建" Name="Menu_File_New" Click="Menu_File_New_Click"/>
                 <Separator/>
-                <MenuItem Header="Export" Name="Menu_File_Export">
-                    <MenuItem Header="Full Package" Name="Menu_File_Export_Package" Click="Menu_File_Export_Package_Click"/>
-                    <MenuItem Header="XML Only" Name="Menu_File_Export_Xml" Click="Menu_File_Export_Xml_Click"/>
-                    <MenuItem Header="Slice Only" Name="Menu_File_Export_Slice" Click="Menu_File_Export_Slice_Click"/>
+                <MenuItem Header="导出" Name="Menu_File_Export">
+                    <MenuItem Header="导出所有内容" Name="Menu_File_Export_Package" Click="Menu_File_Export_Package_Click"/>
+                    <MenuItem Header="仅导出切片信息" Name="Menu_File_Export_Xml" Click="Menu_File_Export_Xml_Click"/>
+                    <MenuItem Header="仅导出切片图片" Name="Menu_File_Export_Slice" Click="Menu_File_Export_Slice_Click"/>
                 </MenuItem>
-                <MenuItem Header="Import" Name="Menu_File_Import">
-                    <MenuItem Header="Replace XML" Name="Menu_File_Import_Xml" Click="Menu_File_Import_Xml_Click"/>
-                    <MenuItem Header="Replace Slice" Name="Menu_File_Import_Slice" Click="Menu_File_Import_Slice_Click"/>
+                <MenuItem Header="导入" Name="Menu_File_Import">
+                    <MenuItem Header="仅导入切片信息" Name="Menu_File_Import_Xml" Click="Menu_File_Import_Xml_Click"/>
+                    <MenuItem Header="仅导入切片图片" Name="Menu_File_Import_Slice" Click="Menu_File_Import_Slice_Click"/>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Edit" Name="Menu_Edit">
-                <MenuItem Header="Undo" Name="Menu_Edit_Undo" Click="Menu_Edit_Undo_Click"/>
-                <MenuItem Header="Reset" Name="Menu_Edit_Reset" Click="Menu_Edit_Reset_Click"/>
-                <MenuItem Header="Copy" Name="Menu_Edit_Copy" Click="Menu_Edit_Copy_Click"/>
-                <MenuItem Header="Paste" Name="Menu_Edit_Paste" Click="Menu_Edit_Paste_Click"/>
+            <MenuItem Header="编辑" Name="Menu_Edit">
+                <MenuItem Header="重置" Name="Menu_Edit_Reset" Click="Menu_Edit_Reset_Click"/>
+                <MenuItem Header="复制切片信息" Name="Menu_Edit_Copy" Click="Menu_Edit_Copy_Click"/>
                 <Separator/>
-                <MenuItem Header="Modify" Name="Menu_Edit_Modify" Click="Menu_Edit_Modify_Click"/>
+                <MenuItem Header="选择切片文件" Name="Menu_Edit_Modify" Click="Menu_Edit_Modify_Click"/>
             </MenuItem>
-            <MenuItem Header="Setting" Name="Menu_Setting">
-                <MenuItem Header="About" Name="Menu_Setting_About" Click="Menu_Setting_About_Click"/>
-                <MenuItem Header="Update" Name="Menu_Setting_Update" Click="Menu_Setting_Update_Click"/>
-                <MenuItem Header="License" Name="Menu_Setting_License" Click="Menu_Setting_License_Click"/>
+            <MenuItem Header="帮助" Name="Menu_Setting">
+                <MenuItem Header="关于" Name="Menu_Setting_About" Click="Menu_Setting_About_Click"/>
+                <MenuItem Header="更新" Name="Menu_Setting_Update" Click="Menu_Setting_Update_Click"/>
+                <MenuItem Header="许可证" Name="Menu_Setting_License" Click="Menu_Setting_License_Click"/>
                 <Separator/>
-                <MenuItem Header="Prefrence" Name="Menu_Setting_Prefrence" Click="Menu_Setting_Prefrence_Click"/>
-                <MenuItem Header="Register" Name="Menu_Setting_Register" Click="Menu_Setting_Register_Click"/>
-                <MenuItem Header="Exit" Name="Menu_Setting_Exit" Click="Menu_Setting_Exit_Click"/>
+                <MenuItem Header="设置" Name="Menu_Setting_Prefrence" Click="Menu_Setting_Prefrence_Click"/>
+                <MenuItem Header="注册" Name="Menu_Setting_Register" Click="Menu_Setting_Register_Click"/>
+                <Separator/>
+                <MenuItem Header="退出" Name="Menu_Setting_Exit" Click="Menu_Setting_Exit_Click"/>
             </MenuItem>
         </Menu>
 
@@ -71,7 +70,7 @@
 
         <!--left panel-->
         <Grid Grid.Column="0" Grid.Row="1">
-            <hc:PropertyGrid Name="Editor" SourceUpdated="Editor_SourceUpdated"/>
+            <hc:PropertyGrid Name="Editor"/>
         </Grid>
 
         <!--right panel-->
@@ -81,7 +80,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ToolBar Grid.Row="0" Header="Toolbox: ">
+            <ToolBar Grid.Row="0" Header="预览工具: ">
                 <Button Height="30" Name="Toolbox_Light" Click="Toolbox_Light_Click">
                     <Image Source="/Assets/light.png"/>
                 </Button>
@@ -116,12 +115,14 @@
                     <Image Source="/Assets/large_up.png"/>
                 </Button>
                 <Button Height="30" Name="Toolbox_SmallUp" Click="Toolbox_SmallUp_Click">
-                    <Image Source="/Assets/small_down.png"/>
+                    <Image Source="/Assets/small_up.png"/>
                 </Button>
             </ToolBar>
 
             <Image Grid.Row="1" Stretch="UniformToFill" Name="Slice" HorizontalAlignment="Center" VerticalAlignment="Center">
-
+                <Image.Effect>
+                    <BlurEffect Radius="0" x:Name="SliceBlur"/>
+                </Image.Effect>
                 <hc:Magnifier.Instance>
                     <hc:Magnifier Scale="4" HorizontalOffset="0" VerticalOffset="0" Name="Slice_Magnifier"/>
                 </hc:Magnifier.Instance>
